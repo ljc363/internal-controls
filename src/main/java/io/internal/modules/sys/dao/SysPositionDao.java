@@ -13,11 +13,4 @@ import java.util.Map;
 @Mapper
 public interface SysPositionDao extends BaseMapper<SysPositionEntity> {
 
- List<SysPositionEntity> queryList(Map<String,Object> params);
-
-    /**
-     * 查询岗位ID列表
-     * @param parentId  部门ID
-     */
-    List<Long> queryPositionIdList(Long parentId);
 }

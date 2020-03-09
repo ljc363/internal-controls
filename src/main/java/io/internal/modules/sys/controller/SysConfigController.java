@@ -8,7 +8,7 @@ import io.internal.common.utils.PageUtils;
 import io.internal.common.utils.R;
 import io.internal.common.validator.ValidatorUtils;
 import io.internal.modules.sys.entity.SysConfigEntity;
-import io.internal.modules.sys.entity.service.SysConfigService;
+import io.internal.modules.sys.service.SysConfigService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

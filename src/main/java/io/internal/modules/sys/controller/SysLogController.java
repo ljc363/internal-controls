@@ -4,7 +4,7 @@ package io.internal.modules.sys.controller;
 
 import io.internal.common.utils.PageUtils;
 import io.internal.common.utils.R;
-import io.internal.modules.sys.entity.service.SysLogService;
+import io.internal.modules.sys.service.SysLogService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

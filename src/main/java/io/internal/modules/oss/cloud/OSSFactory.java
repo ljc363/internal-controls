@@ -6,7 +6,7 @@ package io.internal.modules.oss.cloud;
 import io.internal.common.utils.ConfigConstant;
 import io.internal.common.utils.Constant;
 import io.internal.common.utils.SpringContextUtils;
-import io.internal.modules.sys.entity.service.SysConfigService;
+import io.internal.modules.sys.service.SysConfigService;
 
 /**
  * 文件上传Factory

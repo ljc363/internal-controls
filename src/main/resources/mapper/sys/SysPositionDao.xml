@@ -4,5 +4,4 @@
 <mapper namespace="io.internal.modules.sys.dao.SysPositionDao">
 
 
-
 </mapper>

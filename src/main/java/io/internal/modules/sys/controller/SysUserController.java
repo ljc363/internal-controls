@@ -12,8 +12,8 @@ import io.internal.common.validator.group.AddGroup;
 import io.internal.common.validator.group.UpdateGroup;
 import io.internal.modules.sys.entity.SysUserEntity;
 import io.internal.modules.sys.form.PasswordForm;
-import io.internal.modules.sys.entity.service.SysUserRoleService;
-import io.internal.modules.sys.entity.service.SysUserService;
+import io.internal.modules.sys.service.SysUserRoleService;
+import io.internal.modules.sys.service.SysUserService;
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.crypto.hash.Sha256Hash;
@@ -47,8 +47,8 @@ public class SysUserController extends AbstractController {
 		if(getUserId() != Constant.SUPER_ADMIN){
 			params.put("createUserId", getUserId());
 		}
-		PageUtils page = sysUserService.queryPage(params);
 
+		PageUtils page = sysUserService.queryPage(params);
 		return R.ok().put("page", page);
 	}
 	

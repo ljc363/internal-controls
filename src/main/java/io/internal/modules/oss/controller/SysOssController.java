@@ -16,7 +16,7 @@ import io.internal.modules.oss.cloud.CloudStorageConfig;
 import io.internal.modules.oss.cloud.OSSFactory;
 import io.internal.modules.oss.entity.SysOssEntity;
 import io.internal.modules.oss.service.SysOssService;
-import io.internal.modules.sys.entity.service.SysConfigService;
+import io.internal.modules.sys.service.SysConfigService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

@@ -6,7 +6,7 @@ import java.util.Map;
 import io.internal.common.utils.PageUtils;
 import io.internal.common.utils.R;
 import io.internal.modules.sys.entity.SysProjectMEntity;
-import io.internal.modules.sys.entity.service.SysProjectMService;
+import io.internal.modules.sys.service.SysProjectMService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

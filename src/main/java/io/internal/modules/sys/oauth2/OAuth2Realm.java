@@ -4,7 +4,7 @@ package io.internal.modules.sys.oauth2;
 
 import io.internal.modules.sys.entity.SysUserEntity;
 import io.internal.modules.sys.entity.SysUserTokenEntity;
-import io.internal.modules.sys.entity.service.ShiroService;
+import io.internal.modules.sys.service.ShiroService;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;

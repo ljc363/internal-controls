@@ -6,7 +6,7 @@ import java.util.Map;
 import io.internal.common.utils.PageUtils;
 import io.internal.common.utils.R;
 import io.internal.modules.sys.entity.SysTaskScheduleEntity;
-import io.internal.modules.sys.entity.service.SysTaskScheduleService;
+import io.internal.modules.sys.service.SysTaskScheduleService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;

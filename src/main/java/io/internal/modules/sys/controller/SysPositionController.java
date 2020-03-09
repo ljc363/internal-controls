@@ -3,7 +3,9 @@ package io.internal.modules.sys.controller;
 import io.internal.common.utils.PageUtils;
 import io.internal.common.utils.R;
 import io.internal.modules.sys.entity.SysPositionEntity;
-import io.internal.modules.sys.entity.service.SysPositionService;
+import io.internal.modules.sys.service.SysPositionService;
+import io.netty.util.internal.StringUtil;
+import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,9 +24,9 @@ public class SysPositionController extends AbstractController{
      */
     @RequestMapping("/list")
     @RequiresPermissions("sys:position:list")
-    public R list(@RequestParam Map<String, Object> params){
-       PageUtils page = sysPositionService.queryPage(params);
-        return R.ok().put("page",page);
+    public R list(Map<String,Object>params){
+      PageUtils page = sysPositionService.queryPage(params);
+        return R.ok().put("page", page);
     }
 
 
