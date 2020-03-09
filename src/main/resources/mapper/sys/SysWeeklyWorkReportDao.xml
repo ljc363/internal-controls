@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="io.internal.modules.sys.dao.SysWeeklyWorkReportDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="io.internal.modules.sys.entity.SysWeeklyWorkReportEntity" id="sysWeeklyWorkReportMap">
+        <result property="id" column="id"/>
+        <result property="workDoneThisWeek" column="workDoneThisWeek"/>
+        <result property="weekSummary" column="weekSummary"/>
+        <result property="workPlanForNextWeek" column="workPlanForNextWeek"/>
+        <result property="coordinate" column="coordinate"/>
+        <result property="submissionTime" column="submission_time"/>
+        <result property="remarks" column="remarks"/>
+    </resultMap>
+
+
+</mapper>

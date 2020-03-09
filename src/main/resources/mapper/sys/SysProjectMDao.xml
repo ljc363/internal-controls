@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="io.internal.modules.sys.dao.SysProjectMDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="io.internal.modules.sys.entity.SysProjectMEntity" id="sysProjectMMap">
+        <result property="id" column="id"/>
+        <result property="projectname" column="projectName"/>
+        <result property="number" column="number"/>
+        <result property="remark" column="remark"/>
+        <result property="personincharge" column="personInCharge"/>
+        <result property="startsTime" column="starts_time"/>
+        <result property="endTime" column="end_time"/>
+        <result property="paecs" column="paecs"/>
+    </resultMap>
+
+
+</mapper>
