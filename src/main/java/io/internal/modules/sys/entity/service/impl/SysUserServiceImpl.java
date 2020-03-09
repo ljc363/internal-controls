@@ -55,11 +55,11 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserDao, SysUserEntity> i
 				.eq(createUserId != null,"create_user_id", createUserId)
 				.apply(params.get(Constant.SQL_FILTER) != null, (String)params.get(Constant.SQL_FILTER))
 		);
-		for (SysUserEntity sysUserEntity : page.getRecords()){
+		/*for (SysUserEntity sysUserEntity : page.getRecords()){
 	     	SysPositionEntity sysPositionEntity = sysPositionService.getById(sysUserEntity.getPositionId());		     	
 	     		sysUserEntity.setPositionName( sysPositionEntity.getName());
 
-		}
+		}*/
 
 		return new PageUtils(page);
 	}
