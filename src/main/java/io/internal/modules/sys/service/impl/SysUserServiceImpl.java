@@ -36,7 +36,10 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserDao, SysUserEntity> i
 	private SysUserRoleService sysUserRoleService;
 	@Autowired
 	private SysRoleService sysRoleService;
-
+    @Autowired
+	private SysUserPostService sysUserPostService;
+    @Autowired
+	private SysPostService sysPostService;
 
 
 	@Override
