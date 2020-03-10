@@ -30,4 +30,15 @@ public class SysTaskScheduleServiceImpl extends ServiceImpl<SysTaskScheduleDao, 
         return new PageUtils(page);
     }
 
+    @Override
+    public PageUtils startPage(Map<String, Object> params) {
+        IPage<SysTaskScheduleEntity> page = this.page(
+                new Query<SysTaskScheduleEntity>().getPage(params),
+                new QueryWrapper<SysTaskScheduleEntity>()
+
+
+        );
+
+        return new PageUtils(page);
+    }
 }

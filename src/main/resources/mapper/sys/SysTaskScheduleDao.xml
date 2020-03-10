@@ -3,7 +3,9 @@
 
 <mapper namespace="io.internal.modules.generator.dao.SysTaskScheduleDao">
 
-
+  <select id="list" resultType="SysTaskScheduleEntity">
+      SELECT * FROM sys_task_schedule where `status`=0 or `status`=1
+  </select>
 
 
 </mapper>

@@ -10,12 +10,8 @@ import io.internal.common.utils.Constant;
 import io.internal.common.utils.PageUtils;
 import io.internal.common.utils.Query;
 import io.internal.modules.sys.dao.SysUserDao;
-import io.internal.modules.sys.entity.SysPositionEntity;
 import io.internal.modules.sys.entity.SysUserEntity;
-import io.internal.modules.sys.service.SysPositionService;
-import io.internal.modules.sys.service.SysRoleService;
-import io.internal.modules.sys.service.SysUserRoleService;
-import io.internal.modules.sys.service.SysUserService;
+import io.internal.modules.sys.service.*;
 import org.apache.commons.lang.RandomStringUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.crypto.hash.Sha256Hash;
@@ -40,8 +36,8 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserDao, SysUserEntity> i
 	private SysUserRoleService sysUserRoleService;
 	@Autowired
 	private SysRoleService sysRoleService;
-	@Autowired
-	private SysPositionService sysPositionService;
+
+
 
 	@Override
 	public PageUtils queryPage(Map<String, Object> params) {
@@ -57,8 +53,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserDao, SysUserEntity> i
 		);
 
 		for (SysUserEntity sysUserEntity : page.getRecords()){
-			SysPositionEntity sysPositionEntity = sysPositionService.getById(sysUserEntity.getPositionId());
-			sysUserEntity.setPositionName(sysPositionEntity.getName());
+
 
 		}
 		return new PageUtils(page);
@@ -88,12 +83,13 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserDao, SysUserEntity> i
 		user.setPassword(new Sha256Hash(user.getPassword(), salt).toHex());
 		user.setSalt(salt);
 		this.save(user);
-		
+
 		//检查角色是否越权
 		checkRole(user);
 		
 		//保存用户与角色关系
 		sysUserRoleService.saveOrUpdate(user.getUserId(), user.getRoleIdList());
+
 	}
 
 	@Override
@@ -111,6 +107,8 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserDao, SysUserEntity> i
 		
 		//保存用户与角色关系
 		sysUserRoleService.saveOrUpdate(user.getUserId(), user.getRoleIdList());
+
+
 	}
 
 	@Override

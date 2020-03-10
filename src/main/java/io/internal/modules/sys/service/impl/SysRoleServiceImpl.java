@@ -35,8 +35,6 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleDao, SysRoleEntity> i
 	private SysUserService sysUserService;
     @Autowired
     private SysUserRoleService sysUserRoleService;
-	@Autowired
-	private SysPositionService sysPositionServier;
 
 	@Override
 	public PageUtils queryPage(Map<String, Object> params) {
@@ -78,7 +76,7 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleDao, SysRoleEntity> i
 
         //更新角色与菜单关系
         sysRoleMenuService.saveOrUpdate(role.getRoleId(), role.getMenuIdList());
-       // sysRolePositionService.saveOrUpdate(role.getRoleId(), role.getPositionIdList());
+
     }
 
     @Override

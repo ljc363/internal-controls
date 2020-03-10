@@ -5,6 +5,8 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import io.internal.modules.sys.entity.SysTaskScheduleEntity;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 /**
  * 任务计划表
  * 
@@ -14,5 +16,6 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface SysTaskScheduleDao extends BaseMapper<SysTaskScheduleEntity> {
-	
+
+    List<SysTaskScheduleEntity>list();
 }

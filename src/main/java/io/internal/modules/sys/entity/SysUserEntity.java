@@ -50,18 +50,6 @@ public class SysUserEntity implements Serializable {
 	 */
 	private String salt;
 
-	/**
-	 * 岗位ID
-	 */
-	@NotNull(message="岗位ID不能为空", groups = {AddGroup.class, UpdateGroup.class})
-	private Long positionId;
-
-
-	/**
-	 * 岗位名称
-	 */
-	@TableField(exist=false)
-	private String positionName;
 
 	/**
 	 * 状态  0：禁用   1：正常
@@ -75,6 +63,12 @@ public class SysUserEntity implements Serializable {
 	private List<Long> roleIdList;
 
 	/**
+	 * 岗位ID列表
+	 */
+	@TableField(exist=false)
+	private List<Long> positionIdList;
+
+	/**
 	 * 创建者ID
 	 */
 	private Long createUserId;
@@ -83,5 +77,17 @@ public class SysUserEntity implements Serializable {
 	 * 创建时间
 	 */
 	private Date createTime;
+
+	/**
+	 * 岗位名称
+	 */
+	@TableField(exist=false)
+	private String positionName;
+
+	/**
+	 * 岗位ID
+	 */
+    @NotNull(message="岗位ID不能为空", groups = {AddGroup.class, UpdateGroup.class})
+	private Long positionId;
 
 }

@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import io.internal.common.utils.PageUtils;
 import io.internal.modules.sys.entity.SysTaskScheduleEntity;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -16,6 +17,9 @@ import java.util.Map;
  */
 public interface SysTaskScheduleService extends IService<SysTaskScheduleEntity> {
 
+
     PageUtils queryPage(Map<String, Object> params);
+
+    PageUtils startPage(Map<String, Object> params);
 }
 
