@@ -71,6 +71,14 @@ public class SysTaskScheduleEntity implements Serializable {
 	 */
 	private String auditor;
 	/**
+	 * 实际工时
+	 */
+     private String actualWorkingHours;
+	/**
+	 * 预计工时
+	 */
+	 private String estimatedWorkingHours;
+	/**
 	 * 备注
 	 */
 	private String remark;

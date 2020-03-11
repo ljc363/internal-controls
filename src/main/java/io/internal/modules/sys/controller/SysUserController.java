@@ -12,6 +12,7 @@ import io.internal.common.validator.group.AddGroup;
 import io.internal.common.validator.group.UpdateGroup;
 import io.internal.modules.sys.entity.SysUserEntity;
 import io.internal.modules.sys.form.PasswordForm;
+import io.internal.modules.sys.service.SysUserPostService;
 import io.internal.modules.sys.service.SysUserRoleService;
 import io.internal.modules.sys.service.SysUserService;
 import org.apache.commons.lang.ArrayUtils;
@@ -35,7 +36,8 @@ public class SysUserController extends AbstractController {
 	private SysUserService sysUserService;
 	@Autowired
 	private SysUserRoleService sysUserRoleService;
-
+	@Autowired
+	private SysUserPostService sysUserPostService;
 
 	/**
 	 * 所有用户列表
@@ -94,6 +96,8 @@ public class SysUserController extends AbstractController {
 		//获取用户所属的角色列表
 		List<Long> roleIdList = sysUserRoleService.queryRoleIdList(userId);
 		user.setRoleIdList(roleIdList);
+		List<Long> postIdList = sysUserPostService.queryPostIdList(userId);
+		user.setPostIdList(postIdList);
 		return R.ok().put("user", user);
 	}
 	

@@ -10,6 +10,7 @@ import io.internal.common.utils.Constant;
 import io.internal.common.utils.PageUtils;
 import io.internal.common.utils.Query;
 import io.internal.modules.sys.dao.SysUserDao;
+import io.internal.modules.sys.entity.SysPostEntity;
 import io.internal.modules.sys.entity.SysUserEntity;
 import io.internal.modules.sys.service.*;
 import org.apache.commons.lang.RandomStringUtils;
@@ -36,9 +37,9 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserDao, SysUserEntity> i
 	private SysUserRoleService sysUserRoleService;
 	@Autowired
 	private SysRoleService sysRoleService;
-    @Autowired
+	@Autowired
 	private SysUserPostService sysUserPostService;
-    @Autowired
+	@Autowired
 	private SysPostService sysPostService;
 
 
@@ -48,17 +49,18 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserDao, SysUserEntity> i
 		Long createUserId = (Long)params.get("createUserId");
 
 		IPage<SysUserEntity> page = this.page(
-			new Query<SysUserEntity>().getPage(params),
-			new QueryWrapper<SysUserEntity>()
-				.like(StringUtils.isNotBlank(username),"username", username)
-				.eq(createUserId != null,"create_user_id", createUserId)
-				.apply(params.get(Constant.SQL_FILTER) != null, (String)params.get(Constant.SQL_FILTER))
+				new Query<SysUserEntity>().getPage(params),
+				new QueryWrapper<SysUserEntity>()
+						.like(StringUtils.isNotBlank(username),"username", username)
+						.eq(createUserId != null,"create_user_id", createUserId)
+						.apply(params.get(Constant.SQL_FILTER) != null, (String)params.get(Constant.SQL_FILTER))
 		);
 
-		for (SysUserEntity sysUserEntity : page.getRecords()){
+		/*for (SysUserEntity sysUserEntity : page.getRecords()){
+			SysPostEntity SysPostEntity = sysPostService.getById(sysUserEntity.getPostId());
+			sysUserEntity.setPostName(SysPostEntity.getName());
 
-
-		}
+		}*/
 		return new PageUtils(page);
 	}
 
@@ -89,9 +91,11 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserDao, SysUserEntity> i
 
 		//检查角色是否越权
 		checkRole(user);
-		
+
 		//保存用户与角色关系
 		sysUserRoleService.saveOrUpdate(user.getUserId(), user.getRoleIdList());
+
+		sysUserPostService.saveOrUpdate(user.getUserId(),user.getPostIdList());
 
 	}
 
@@ -104,13 +108,14 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserDao, SysUserEntity> i
 			user.setPassword(new Sha256Hash(user.getPassword(), user.getSalt()).toHex());
 		}
 		this.updateById(user);
-		
+
 		//检查角色是否越权
 		checkRole(user);
-		
+
 		//保存用户与角色关系
 		sysUserRoleService.saveOrUpdate(user.getUserId(), user.getRoleIdList());
 
+		sysUserPostService.saveOrUpdate(user.getUserId(),user.getPostIdList());
 
 	}
 
@@ -126,7 +131,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserDao, SysUserEntity> i
 		return this.update(userEntity,
 				new QueryWrapper<SysUserEntity>().eq("user_id", userId).eq("password", password));
 	}
-	
+
 	/**
 	 * 检查角色是否越权
 	 */
@@ -138,7 +143,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserDao, SysUserEntity> i
 		if(user.getCreateUserId() == Constant.SUPER_ADMIN){
 			return ;
 		}
-		
+
 		//查询用户创建的角色列表
 		List<Long> roleIdList = sysRoleService.queryRoleIdList(user.getCreateUserId());
 

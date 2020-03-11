@@ -57,16 +57,10 @@ public class SysUserEntity implements Serializable {
 	private Integer status;
 
 	/**
-	 * 角色ID列表
+	 * 岗位ID
 	 */
-	@TableField(exist=false)
-	private List<Long> roleIdList;
-
-	/**
-	 * 岗位ID列表
-	 */
-	@TableField(exist=false)
-	private List<Long> postIdList;
+	@NotNull(message="岗位ID不能为空", groups = {AddGroup.class, UpdateGroup.class})
+	private String postName;
 
 	/**
 	 * 创建者ID
@@ -79,15 +73,24 @@ public class SysUserEntity implements Serializable {
 	private Date createTime;
 
 	/**
-	 * 岗位名称
+	 * 角色ID列表
 	 */
 	@TableField(exist=false)
-	private String positionName;
+	private List<Long> roleIdList;
 
 	/**
-	 * 岗位ID
+	 * 岗位ID列表
 	 */
-    @NotNull(message="岗位ID不能为空", groups = {AddGroup.class, UpdateGroup.class})
-	private Long postId;
+	@TableField(exist=false)
+	private List<Long> postIdList;
+
+
+	/**
+	 * 岗位名称
+	 *//*
+	@TableField(exist=false)
+	private String postName;*/
+
+
 
 }
