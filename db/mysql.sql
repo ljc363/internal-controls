@@ -12,8 +12,8 @@ CREATE TABLE `sys_menu` (
 ) ENGINE=`InnoDB` DEFAULT CHARACTER SET utf8mb4 COMMENT='菜单管理';
 
 -- 岗位
-CREATE TABLE `sys_position` (
-  `position_id` bigint NOT NULL AUTO_INCREMENT,
+CREATE TABLE `sys_post` (
+  `post_id` bigint NOT NULL AUTO_INCREMENT,
   `name` varchar(50) COMMENT '岗位名称',
   `order_num` int COMMENT '排序',
   `del_flag` tinyint DEFAULT 0 COMMENT '是否删除  -1：已删除  0：正常',
@@ -27,7 +27,7 @@ CREATE TABLE `sys_user` (
   `password` varchar(100) COMMENT '密码',
   `salt` varchar(20) COMMENT '盐',
   `status` tinyint COMMENT '状态  0：禁用   1：正常',
-  `position_id` bigint(20) COMMENT '岗位ID',
+  `post_name` bigint(20) COMMENT '岗位',
   `create_user_id` bigint(20) COMMENT '创建者ID',
   `create_time` datetime COMMENT '创建时间',
   PRIMARY KEY (`user_id`),
@@ -46,9 +46,9 @@ CREATE TABLE `sys_role` (
 --项目记录
 CREATE TABLE `sys_project_m` (
   `id` bigint NOT NULL AUTO_INCREMENT,
-  `project_name` varchar(100) COMMENT '项目名称',
+  `project_name` varchar(100) NOT NULL COMMENT '项目名称',
   `number` varchar(50) COMMENT '项目编号',
-  `person_in_charge` varchar(100) COMMENT '负责人',
+  `person_in_charge` varchar(100) NOT NULL COMMENT '负责人',
   `starts_time` datetime COMMENT '开始时间',
   `end_time` datetime COMMENT '结束时间',
   `status` tinyint COMMENT '状态  0未开始，1开发中，2延期，3完成',
@@ -59,17 +59,19 @@ CREATE TABLE `sys_project_m` (
 --任务计划表
 CREATE TABLE `sys_task_schedule` (
   `id` bigint NOT NULL AUTO_INCREMENT,
-  `project_name` varchar(100) COMMENT '项目名称',
-  `task_name` varchar(100) COMMENT '任务名称',
+  `project_name` varchar(100) NOT NULL COMMENT '项目名称',
+  `task_name` varchar(100) NOT NULL COMMENT '任务名称',
   `sub_task` varchar(100) COMMENT '子任务',
   `planned_start_time` datetime COMMENT '计划开始时间',
   `planned_end_time` datetime COMMENT '计划结束时间',
   `actual_start_time` datetime COMMENT '实际开始时间',
   `actual_end_time` datetime COMMENT '实际结束时间',
   `status` tinyint COMMENT '状态 ',
-  `person_in_charge` varchar(100) COMMENT '负责人',
+  `person_in_charge` varchar(100) NOT NULL COMMENT '负责人',
   `auditor` varchar(100) COMMENT '审核人',
   `remark` varchar(500) COMMENT '备注',
+  "estimated_working_hours" varchar(20) COMMENT '预计工时',
+  "actual_working_hours" varchar(20) COMMENT '实际工时',
    PRIMARY KEY (`id`)
 ) ENGINE=`InnoDB` DEFAULT CHARACTER SET utf8mb4 COMMENT='任务计划表';
 
@@ -105,6 +107,15 @@ CREATE TABLE `sys_user_role` (
   `role_id` bigint COMMENT '角色ID',
   PRIMARY KEY (`id`)
 ) ENGINE=`InnoDB` DEFAULT CHARACTER SET utf8mb4 COMMENT='用户与角色对应关系';
+
+-- 用户与岗位对应关系
+CREATE TABLE `sys_user_post` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `user_id` bigint COMMENT '用户ID',
+  `post_id` bigint COMMENT '角色ID',
+  PRIMARY KEY (`id`)
+) ENGINE=`InnoDB` DEFAULT CHARACTER SET utf8mb4 COMMENT='用户与岗位对应关系';
+
 
 -- 角色与菜单对应关系
 CREATE TABLE `sys_role_menu` (
