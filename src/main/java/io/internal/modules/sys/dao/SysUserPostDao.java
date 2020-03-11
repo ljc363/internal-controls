@@ -21,7 +21,6 @@ public interface SysUserPostDao extends BaseMapper<SysUserPostEntity> {
      */
     List<Long> queryPostIdList(Long userId);
 
-
     /**
      * 根据角色ID数组，批量删除
      */

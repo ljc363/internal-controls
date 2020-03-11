@@ -26,9 +26,9 @@ public class SysProjectMServiceImpl extends ServiceImpl<SysProjectMDao, SysProje
         IPage<SysProjectMEntity> page = this.page(
                 new Query<SysProjectMEntity>().getPage(params),
                 new QueryWrapper<SysProjectMEntity>()
-                        .like(StringUtils.isNotBlank(projectName),"projectName",projectName)
+                        .like(StringUtils.isNotBlank(projectName),"project_name",projectName)
                         .like(StringUtils.isNotBlank(number),"number",number)
-                        .like(StringUtils.isNotBlank(personInCharge),"personInCharge",personInCharge)
+                        .like(StringUtils.isNotBlank(personInCharge),"person_in_charge",personInCharge)
                         .orderByDesc(number)
         );
         return new PageUtils(page);

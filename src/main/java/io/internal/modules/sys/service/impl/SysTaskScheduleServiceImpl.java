@@ -9,6 +9,8 @@ import io.internal.modules.sys.entity.SysTaskScheduleEntity;
 import io.internal.modules.sys.service.SysTaskScheduleService;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
+
+import java.util.Arrays;
 import java.util.Map;
 import io.internal.common.utils.Query;
 
@@ -22,8 +24,8 @@ public class SysTaskScheduleServiceImpl extends ServiceImpl<SysTaskScheduleDao, 
         IPage<SysTaskScheduleEntity> page = this.page(
                 new Query<SysTaskScheduleEntity>().getPage(params),
                 new QueryWrapper<SysTaskScheduleEntity>()
-                .like(StringUtils.isNotBlank(projectName),"projectName",projectName)
-                .like(StringUtils.isNotBlank(taskName),"taskName",taskName)
+                .like(StringUtils.isNotBlank(projectName),"project_name",projectName)
+                .like(StringUtils.isNotBlank(taskName),"task_name",taskName)
 
         );
 
@@ -31,14 +33,7 @@ public class SysTaskScheduleServiceImpl extends ServiceImpl<SysTaskScheduleDao, 
     }
 
     @Override
-    public PageUtils startPage(Map<String, Object> params) {
-        IPage<SysTaskScheduleEntity> page = this.page(
-                new Query<SysTaskScheduleEntity>().getPage(params),
-                new QueryWrapper<SysTaskScheduleEntity>()
-
-
-        );
-
-        return new PageUtils(page);
+    public void deleteBatch(Long[] ids) {
+        this.removeByIds(Arrays.asList(ids));
     }
 }

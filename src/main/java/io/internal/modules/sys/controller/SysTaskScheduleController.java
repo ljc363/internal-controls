@@ -83,8 +83,7 @@ public class SysTaskScheduleController {
     @RequestMapping("/delete")
     @RequiresPermissions("sys:taskSchedule:delete")
     public R delete(@RequestBody Long[] ids){
-		sysTaskScheduleService.removeByIds(Arrays.asList(ids));
-
+		sysTaskScheduleService.deleteBatch(ids);
         return R.ok();
     }
 
