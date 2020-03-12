@@ -24,6 +24,7 @@ CREATE TABLE `sys_post` (
 CREATE TABLE `sys_user` (
   `user_id` bigint NOT NULL AUTO_INCREMENT,
   `username` varchar(50) NOT NULL COMMENT '用户名',
+  `real_name` varchar(50) NOT NULL COMMENT '真实用户名',
   `password` varchar(100) COMMENT '密码',
   `salt` varchar(20) COMMENT '盐',
   `status` tinyint COMMENT '状态  0：禁用   1：正常',
@@ -56,6 +57,21 @@ CREATE TABLE `sys_project_m` (
   PRIMARY KEY (`id`)
 ) ENGINE=`InnoDB` DEFAULT CHARACTER SET utf8mb4 COMMENT='项目记录';
 
+--项目里程碑
+CREATE TABLE `sys_project_milepost` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `project_id` bigint(20)  COMMENT '项目ID',
+  `content` MEDIUMTEXT COMMENT '里程碑内容',
+  `user_id` bigint(20)  COMMENT '负责人',
+  `planned_start_time` datetime COMMENT '计划开始时间',
+  `planned_end_time` datetime COMMENT '计划结束时间',
+  `actual_start_time` datetime COMMENT '实际开始时间',
+  `actual_end_time` datetime COMMENT '实际结束时间',
+  `status` tinyint COMMENT '状态  0未开始，1开始，2完成',
+  `remark` varchar(500) COMMENT '备注',
+  PRIMARY KEY (`id`)
+) ENGINE=`InnoDB` DEFAULT CHARACTER SET utf8mb4 COMMENT='项目里程碑';
+
 --任务计划表
 CREATE TABLE `sys_task_schedule` (
   `id` bigint NOT NULL AUTO_INCREMENT,
@@ -67,7 +83,7 @@ CREATE TABLE `sys_task_schedule` (
   `actual_start_time` datetime COMMENT '实际开始时间',
   `actual_end_time` datetime COMMENT '实际结束时间',
   `status` tinyint COMMENT '状态 ',
-  `person_in_charge` varchar(100) NOT NULL COMMENT '负责人',
+  `user_id` bigint(20) NOT NULL COMMENT '用户ID',
   `auditor` varchar(100) COMMENT '审核人',
   `remark` varchar(500) COMMENT '备注',
   "estimated_working_hours" varchar(20) COMMENT '预计工时',
