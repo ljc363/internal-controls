@@ -36,13 +36,6 @@ public class SysProjectMilepostServiceImpl extends ServiceImpl<SysProjectMilepos
                 new QueryWrapper<SysProjectMilepostEntity>()
                 .like(StringUtils.isNotBlank(personInCharge),"person_in_charge",personInCharge)
         );
-        for (SysProjectMilepostEntity sysProjectMilepostEntity :page.getRecords()){
-            SysProjectMEntity sysProjectMEntity = sysProjectMService.getById(sysProjectMilepostEntity.getProjectId());
-            sysProjectMilepostEntity.setItemsUnderIt(sysProjectMEntity.getProjectName());
-
-            SysUserEntity sysUserEntity = sysUserService.getById(sysProjectMilepostEntity.getUserId());
-            sysProjectMilepostEntity.setPersonInCharge(sysUserEntity.getRealName());
-        }
         return new PageUtils(page);
     }
 

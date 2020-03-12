@@ -61,16 +61,11 @@ public class SysUserEntity implements Serializable {
 	 */
 	private Integer status;
 
-	/**
-	 * 岗位ID
-	 */
-	@NotNull(message="岗位ID不能为空", groups = {AddGroup.class, UpdateGroup.class})
-	private Long postId;
 
 	/**
 	 * 岗位名称
 	 */
-	@TableField(exist=false)
+	@NotNull(message="岗位ID不能为空", groups = {AddGroup.class, UpdateGroup.class})
 	private String postName;
 
 	/**
@@ -89,10 +84,6 @@ public class SysUserEntity implements Serializable {
 	@TableField(exist=false)
 	private List<Long> roleIdList;
 
-	/**
-	 * 岗位ID列表
-	 */
-	@TableField(exist=false)
-	private List<Long> postIdList;
+
 
 }

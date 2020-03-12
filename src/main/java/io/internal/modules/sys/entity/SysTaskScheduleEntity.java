@@ -63,14 +63,10 @@ public class SysTaskScheduleEntity implements Serializable {
 	 * 进度
 	 */
 	private Integer status;
-	/**
-	 * 用户Id
-	 */
-     private Long userId;
+
 	/**
 	 * 负责人
 	 */
-	@TableField(exist=false)
 	private String personInCharge;
 	/**
 	 * 审核人

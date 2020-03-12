@@ -37,10 +37,6 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserDao, SysUserEntity> i
 	private SysUserRoleService sysUserRoleService;
 	@Autowired
 	private SysRoleService sysRoleService;
-	@Autowired
-	private SysUserPostService sysUserPostService;
-	@Autowired
-	private SysPostService sysPostService;
 
 
 	@Override
@@ -55,11 +51,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserDao, SysUserEntity> i
 					.eq(createUserId != null,"create_user_id", createUserId)
 					.apply(params.get(Constant.SQL_FILTER) != null, (String)params.get(Constant.SQL_FILTER))
 		);
-		for (SysUserEntity sysUserEntity : page.getRecords()){
-			SysPostEntity SysPostEntity = sysPostService.getById(sysUserEntity.getPostId());
-			sysUserEntity.setPostName(SysPostEntity.getName());
 
-		}
 		return new PageUtils(page);
 	}
 
@@ -87,14 +79,11 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserDao, SysUserEntity> i
 		user.setPassword(new Sha256Hash(user.getPassword(), salt).toHex());
 		user.setSalt(salt);
 		this.save(user);
-
 		//检查角色是否越权
 		checkRole(user);
-
 		//保存用户与角色关系
 		sysUserRoleService.saveOrUpdate(user.getUserId(), user.getRoleIdList());
 
-		sysUserPostService.saveOrUpdate(user.getUserId(),user.getPostIdList());
 
 	}
 
@@ -114,7 +103,6 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserDao, SysUserEntity> i
 		//保存用户与角色关系
 		sysUserRoleService.saveOrUpdate(user.getUserId(), user.getRoleIdList());
 
-		sysUserPostService.saveOrUpdate(user.getUserId(),user.getPostIdList());
 
 	}
 

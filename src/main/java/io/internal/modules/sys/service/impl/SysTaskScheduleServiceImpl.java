@@ -17,13 +17,11 @@ import java.util.Arrays;
 import java.util.Map;
 import io.internal.common.utils.Query;
 
-import javax.annotation.Resource;
+
 
 @Service("sysTaskScheduleService")
 public class SysTaskScheduleServiceImpl extends ServiceImpl<SysTaskScheduleDao, SysTaskScheduleEntity> implements SysTaskScheduleService {
 
-    @Resource
-    private SysUserService sysUserService;
 
     @Override
     public PageUtils queryPage(Map<String, Object> params) {
@@ -35,10 +33,7 @@ public class SysTaskScheduleServiceImpl extends ServiceImpl<SysTaskScheduleDao, 
                 .like(StringUtils.isNotBlank(projectName),"project_name",projectName)
                 .like(StringUtils.isNotBlank(taskName),"task_name",taskName)
         );
-          for (SysTaskScheduleEntity taskSchedule :page.getRecords()){
-              SysUserEntity sysUserEntity = sysUserService.getById(taskSchedule.getUserId());
-              taskSchedule.setPersonInCharge(sysUserEntity.getRealName());
-          }
+
         return new PageUtils(page);
     }
 

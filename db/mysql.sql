@@ -28,7 +28,7 @@ CREATE TABLE `sys_user` (
   `password` varchar(100) COMMENT '密码',
   `salt` varchar(20) COMMENT '盐',
   `status` tinyint COMMENT '状态  0：禁用   1：正常',
-  `post_name` bigint(20) COMMENT '岗位',
+  `post_name` varchar(100) COMMENT '岗位',
   `create_user_id` bigint(20) COMMENT '创建者ID',
   `create_time` datetime COMMENT '创建时间',
   PRIMARY KEY (`user_id`),
@@ -60,9 +60,9 @@ CREATE TABLE `sys_project_m` (
 --项目里程碑
 CREATE TABLE `sys_project_milepost` (
   `id` bigint NOT NULL AUTO_INCREMENT,
-  `project_id` bigint(20)  COMMENT '项目ID',
+  `items_under_it` varchar(100)  COMMENT '所属项目',
   `content` MEDIUMTEXT COMMENT '里程碑内容',
-  `user_id` bigint(20)  COMMENT '负责人',
+  `real_name` varchar(100)  COMMENT '负责人',
   `planned_start_time` datetime COMMENT '计划开始时间',
   `planned_end_time` datetime COMMENT '计划结束时间',
   `actual_start_time` datetime COMMENT '实际开始时间',
@@ -123,14 +123,6 @@ CREATE TABLE `sys_user_role` (
   `role_id` bigint COMMENT '角色ID',
   PRIMARY KEY (`id`)
 ) ENGINE=`InnoDB` DEFAULT CHARACTER SET utf8mb4 COMMENT='用户与角色对应关系';
-
--- 用户与岗位对应关系
-CREATE TABLE `sys_user_post` (
-  `id` bigint NOT NULL AUTO_INCREMENT,
-  `user_id` bigint COMMENT '用户ID',
-  `post_id` bigint COMMENT '角色ID',
-  PRIMARY KEY (`id`)
-) ENGINE=`InnoDB` DEFAULT CHARACTER SET utf8mb4 COMMENT='用户与岗位对应关系';
 
 
 -- 角色与菜单对应关系

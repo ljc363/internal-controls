@@ -10,15 +10,11 @@ import io.internal.common.validator.Assert;
 import io.internal.common.validator.ValidatorUtils;
 import io.internal.common.validator.group.AddGroup;
 import io.internal.common.validator.group.UpdateGroup;
-import io.internal.modules.sys.entity.SysPostEntity;
-import io.internal.modules.sys.entity.SysTaskScheduleEntity;
 import io.internal.modules.sys.entity.SysUserEntity;
 import io.internal.modules.sys.form.PasswordForm;
 import io.internal.modules.sys.service.SysTaskScheduleService;
-import io.internal.modules.sys.service.SysUserPostService;
 import io.internal.modules.sys.service.SysUserRoleService;
 import io.internal.modules.sys.service.SysUserService;
-import io.internal.modules.sys.service.impl.SysTaskScheduleServiceImpl;
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.crypto.hash.Sha256Hash;
@@ -41,8 +37,6 @@ public class SysUserController extends AbstractController {
 	private SysUserService sysUserService;
 	@Autowired
 	private SysUserRoleService sysUserRoleService;
-	@Autowired
-	private SysUserPostService sysUserPostService;
 	@Autowired
 	private SysTaskScheduleService sysTaskScheduleService;
 
@@ -114,8 +108,6 @@ public class SysUserController extends AbstractController {
 		//获取用户所属的角色列表
 		List<Long> roleIdList = sysUserRoleService.queryRoleIdList(userId);
 		user.setRoleIdList(roleIdList);
-		List<Long> postIdList = sysUserPostService.queryPostIdList(userId);
-		user.setPostIdList(postIdList);
 		return R.ok().put("user", user);
 	}
 	
@@ -142,7 +134,6 @@ public class SysUserController extends AbstractController {
 	@RequiresPermissions("sys:user:update")
 	public R update(@RequestBody SysUserEntity user){
 		ValidatorUtils.validateEntity(user, UpdateGroup.class);
-
 		user.setCreateUserId(getUserId());
 		sysUserService.update(user);
 		

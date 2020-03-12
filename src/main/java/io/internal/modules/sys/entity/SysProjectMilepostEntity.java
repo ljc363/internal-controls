@@ -18,15 +18,15 @@ public class SysProjectMilepostEntity implements Serializable {
 
     private Long Id;
     /**
-     * 所属项目Id
+     * 所属项目
      */
     @NotNull(message="所属项目不能为空", groups = {AddGroup.class, UpdateGroup.class})
-    private Long projectId;
+    private String itemsUnderIt;
     /**
-     * 用户ID
+     * 用户
      */
     @NotNull(message="负责人不能为空", groups = {AddGroup.class, UpdateGroup.class})
-    private Long userId;
+    private String realName;
     /**
      * 内容
      */
@@ -62,14 +62,5 @@ public class SysProjectMilepostEntity implements Serializable {
     private String remark;
 
 
-    /**
-     * 负责人
-     */
-    @TableField(exist = false)
-    private String personInCharge;
-    /**
-     * 所属项目名称
-     */
-    @TableField(exist = false)
-    private String itemsUnderIt;
+
 }
