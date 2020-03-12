@@ -1,5 +1,6 @@
 package io.internal.modules.sys.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 
@@ -63,8 +64,13 @@ public class SysTaskScheduleEntity implements Serializable {
 	 */
 	private Integer status;
 	/**
+	 * 用户Id
+	 */
+     private Long userId;
+	/**
 	 * 负责人
 	 */
+	@TableField(exist=false)
 	private String personInCharge;
 	/**
 	 * 审核人

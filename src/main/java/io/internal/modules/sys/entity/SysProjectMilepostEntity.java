@@ -1,5 +1,6 @@
 package io.internal.modules.sys.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.internal.common.validator.group.AddGroup;
@@ -17,19 +18,20 @@ public class SysProjectMilepostEntity implements Serializable {
 
     private Long Id;
     /**
-     * 所属项目
+     * 所属项目Id
      */
     @NotNull(message="所属项目不能为空", groups = {AddGroup.class, UpdateGroup.class})
-    private String itemsUnderIt;
+    private Long projectId;
+    /**
+     * 用户ID
+     */
+    @NotNull(message="负责人不能为空", groups = {AddGroup.class, UpdateGroup.class})
+    private Long userId;
     /**
      * 内容
      */
     private String content;
-    /**
-     * 负责人
-     */
-    @NotNull(message="负责人不能为空", groups = {AddGroup.class, UpdateGroup.class})
-    private String personInCharge;
+
     /**
      * 计划开始时间
      */
@@ -58,4 +60,16 @@ public class SysProjectMilepostEntity implements Serializable {
      * 备注
      */
     private String remark;
+
+
+    /**
+     * 负责人
+     */
+    @TableField(exist = false)
+    private String personInCharge;
+    /**
+     * 所属项目名称
+     */
+    @TableField(exist = false)
+    private String itemsUnderIt;
 }

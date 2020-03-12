@@ -34,10 +34,15 @@ public class SysUserEntity implements Serializable {
 	private Long userId;
 
 	/**
-	 * 用户名
+	 * 登录名
 	 */
 	@NotBlank(message="用户名不能为空", groups = {AddGroup.class, UpdateGroup.class})
 	private String username ;
+
+	/**
+	 * 真实用户名
+	 */
+	 private String realName;
 
 	/**
 	 * 密码
@@ -60,6 +65,12 @@ public class SysUserEntity implements Serializable {
 	 * 岗位ID
 	 */
 	@NotNull(message="岗位ID不能为空", groups = {AddGroup.class, UpdateGroup.class})
+	private Long postId;
+
+	/**
+	 * 岗位名称
+	 */
+	@TableField(exist=false)
 	private String postName;
 
 	/**
@@ -83,7 +94,5 @@ public class SysUserEntity implements Serializable {
 	 */
 	@TableField(exist=false)
 	private List<Long> postIdList;
-
-
 
 }

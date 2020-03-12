@@ -51,16 +51,15 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserDao, SysUserEntity> i
 		IPage<SysUserEntity> page = this.page(
 				new Query<SysUserEntity>().getPage(params),
 				new QueryWrapper<SysUserEntity>()
-						.like(StringUtils.isNotBlank(username),"username", username)
-						.eq(createUserId != null,"create_user_id", createUserId)
-						.apply(params.get(Constant.SQL_FILTER) != null, (String)params.get(Constant.SQL_FILTER))
+					.like(StringUtils.isNotBlank(username),"username", username)
+					.eq(createUserId != null,"create_user_id", createUserId)
+					.apply(params.get(Constant.SQL_FILTER) != null, (String)params.get(Constant.SQL_FILTER))
 		);
-
-		/*for (SysUserEntity sysUserEntity : page.getRecords()){
+		for (SysUserEntity sysUserEntity : page.getRecords()){
 			SysPostEntity SysPostEntity = sysPostService.getById(sysUserEntity.getPostId());
 			sysUserEntity.setPostName(SysPostEntity.getName());
 
-		}*/
+		}
 		return new PageUtils(page);
 	}
 

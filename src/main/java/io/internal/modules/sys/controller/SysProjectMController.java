@@ -1,11 +1,14 @@
 package io.internal.modules.sys.controller;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import io.internal.common.utils.PageUtils;
 import io.internal.common.utils.R;
 import io.internal.modules.sys.entity.SysProjectMEntity;
+import io.internal.modules.sys.entity.SysUserEntity;
 import io.internal.modules.sys.service.SysProjectMService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -81,4 +84,14 @@ public class SysProjectMController {
         return R.ok();
     }
 
+    /**
+     * 项目列表
+     */
+    @GetMapping("/select")
+    @RequiresPermissions("sys:projectM:select")
+    public R select(){
+        Map<String, Object> map = new HashMap<>();
+        List<SysProjectMEntity> list = (List<SysProjectMEntity>) sysProjectMService.listByMap(map);
+        return R.ok().put("list", list);
+    }
 }

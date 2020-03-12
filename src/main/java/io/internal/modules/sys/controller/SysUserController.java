@@ -10,17 +10,22 @@ import io.internal.common.validator.Assert;
 import io.internal.common.validator.ValidatorUtils;
 import io.internal.common.validator.group.AddGroup;
 import io.internal.common.validator.group.UpdateGroup;
+import io.internal.modules.sys.entity.SysPostEntity;
+import io.internal.modules.sys.entity.SysTaskScheduleEntity;
 import io.internal.modules.sys.entity.SysUserEntity;
 import io.internal.modules.sys.form.PasswordForm;
+import io.internal.modules.sys.service.SysTaskScheduleService;
 import io.internal.modules.sys.service.SysUserPostService;
 import io.internal.modules.sys.service.SysUserRoleService;
 import io.internal.modules.sys.service.SysUserService;
+import io.internal.modules.sys.service.impl.SysTaskScheduleServiceImpl;
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.crypto.hash.Sha256Hash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -38,6 +43,8 @@ public class SysUserController extends AbstractController {
 	private SysUserRoleService sysUserRoleService;
 	@Autowired
 	private SysUserPostService sysUserPostService;
+	@Autowired
+	private SysTaskScheduleService sysTaskScheduleService;
 
 	/**
 	 * 所有用户列表
@@ -53,7 +60,18 @@ public class SysUserController extends AbstractController {
 		PageUtils page = sysUserService.queryPage(params);
 		return R.ok().put("page", page);
 	}
-	
+
+	/**
+	 * 用户列表
+	 */
+	@GetMapping("/select")
+	@RequiresPermissions("sys:user:select")
+	public R select(){
+		Map<String, Object> map = new HashMap<>();
+		List<SysUserEntity> list = (List<SysUserEntity>) sysUserService.listByMap(map);
+		return R.ok().put("list", list);
+	}
+
 	/**
 	 * 获取登录的用户信息
 	 */
