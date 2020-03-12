@@ -85,12 +85,5 @@ public class SysUserEntity implements Serializable {
 	private List<Long> postIdList;
 
 
-	/**
-	 * 岗位名称
-	 *//*
-	@TableField(exist=false)
-	private String postName;*/
-
-
 
 }

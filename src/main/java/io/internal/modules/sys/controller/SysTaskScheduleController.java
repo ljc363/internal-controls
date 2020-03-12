@@ -3,6 +3,7 @@ package io.internal.modules.sys.controller;
 import java.util.Arrays;
 import java.util.Map;
 
+import io.internal.common.utils.Constant;
 import io.internal.common.utils.PageUtils;
 import io.internal.common.utils.R;
 import io.internal.modules.sys.entity.SysTaskScheduleEntity;
@@ -28,9 +29,23 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("sys/taskSchedule")
-public class SysTaskScheduleController {
+public class SysTaskScheduleController extends AbstractController{
     @Autowired
     private SysTaskScheduleService sysTaskScheduleService;
+
+    /**
+     * 列表
+     */
+    @RequestMapping("/ownList")
+    @RequiresPermissions("sys:taskSchedule:ownList")
+    public R ownList(@RequestParam Map<String, Object> params){
+        //只有超级管理员，才能查看所有管理员列表
+        if(getUserId() != Constant.SUPER_ADMIN){
+            params.put("createUserId", getUserId());
+        }
+        PageUtils page = sysTaskScheduleService.queryPage(params);
+        return R.ok().put("page", page);
+    }
 
     /**
      * 列表
@@ -42,7 +57,6 @@ public class SysTaskScheduleController {
 
         return R.ok().put("page", page);
     }
-
 
     /**
      * 信息
