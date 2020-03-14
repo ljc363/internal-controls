@@ -31,6 +31,7 @@ CREATE TABLE `sys_user` (
   `post_name` varchar(100) COMMENT '岗位',
   `create_user_id` bigint(20) COMMENT '创建者ID',
   `create_time` datetime COMMENT '创建时间',
+  `del_flag` tinyint(20) NOT NULL DEFAULT 0 COMMENT '是否删除 0表示未删除 ，-1表示删除 '
   PRIMARY KEY (`user_id`),
   UNIQUE INDEX (`username`)
 ) ENGINE=`InnoDB` DEFAULT CHARACTER SET utf8mb4 COMMENT='系统用户';
