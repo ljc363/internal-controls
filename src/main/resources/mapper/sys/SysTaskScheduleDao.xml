@@ -1,11 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="io.internal.modules.generator.dao.SysTaskScheduleDao">
+<mapper namespace="io.internal.modules.sys.dao.SysTaskScheduleDao">
+
+    <!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="io.internal.modules.sys.entity.SysTaskScheduleEntity" id="sysTaskScheduleMap">
+        <result property="id" column="id"/>
+        <result property="projectName" column="project_name"/>
+        <result property="taskName" column="task_name"/>
+        <result property="subTask" column="sub_task"/>
+        <result property="plannedStartTime" column="planned_start_time"/>
+        <result property="plannedEndTime" column="planned_end_time"/>
+        <result property="actualStartTime" column="actual_start_time"/>
+        <result property="actualEndTime" column="actual_end_time"/>
+        <result property="status" column="status"/>
+        <result property="personInCharge" column="person_in_charge"/>
+        <result property="auditor" column="auditor"/>
+        <result property="remark" column="remark"/>
+        <result property="estimatedWorkingHours" column="estimated_working_hours"/>
+        <result property="actualWorkingHours" column="actual_working_hours"/>
+    </resultMap>
 
   <select id="list" resultType="SysTaskScheduleEntity">
       SELECT * FROM sys_task_schedule where `status`=0 or `status`=1
   </select>
 
 
+    <select id="personInCharge" resultType="io.internal.modules.sys.entity.SysTaskScheduleEntity">
+        SELECT * FROM sys_task_schedule a WHERE a.person_in_charge = #{personInCharge} and  a.status<![CDATA[!= ]]>2
+    </select>
 </mapper>

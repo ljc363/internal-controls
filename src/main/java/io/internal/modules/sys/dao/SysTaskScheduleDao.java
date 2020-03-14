@@ -2,8 +2,10 @@ package io.internal.modules.sys.dao;
 
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import io.internal.common.utils.PageUtils;
 import io.internal.modules.sys.entity.SysTaskScheduleEntity;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
@@ -18,4 +20,8 @@ import java.util.List;
 public interface SysTaskScheduleDao extends BaseMapper<SysTaskScheduleEntity> {
 
     List<SysTaskScheduleEntity>list();
+
+   SysTaskScheduleEntity personInCharge ( String personInCharge);
+
+
 }

@@ -1,14 +1,12 @@
 package io.internal.modules.sys.entity;
 
-import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.Data;
 
 import java.io.Serializable;
 import java.util.Date;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.Data;
 
 /**
  * 任务计划表
@@ -48,7 +46,7 @@ public class SysTaskScheduleEntity implements Serializable {
 	 * 计划结束时间
 	 */
 	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "Asia/Shanghai")
-	private Date plannedEndTime;
+		private Date plannedEndTime;
 	/**
 	 * 实际结束时间
 	 */
@@ -63,6 +61,11 @@ public class SysTaskScheduleEntity implements Serializable {
 	 * 进度
 	 */
 	private Integer status;
+
+	/**
+	 * 用户ID
+	 */
+	private Long userId;
 
 	/**
 	 * 负责人
@@ -80,6 +83,15 @@ public class SysTaskScheduleEntity implements Serializable {
 	 * 预计工时
 	 */
 	 private String estimatedWorkingHours;
+
+	/**
+	 * 任务优先级
+	 */
+	private int taskPriority;
+	/**
+	 * 完成比例
+	 */
+	private Integer completionRatio;
 	/**
 	 * 备注
 	 */

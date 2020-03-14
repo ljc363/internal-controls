@@ -84,10 +84,13 @@ CREATE TABLE `sys_task_schedule` (
   `actual_end_time` datetime COMMENT '实际结束时间',
   `status` tinyint COMMENT '状态 ',
   `user_id` bigint(20) NOT NULL COMMENT '用户ID',
+  `person_in_charge` varchar(100) NOT NULL COMMENT '负责人',
   `auditor` varchar(100) COMMENT '审核人',
   `remark` varchar(500) COMMENT '备注',
   "estimated_working_hours" varchar(20) COMMENT '预计工时',
   "actual_working_hours" varchar(20) COMMENT '实际工时',
+  "completion_ratio" varchar(50) COMMENT '完成比例',
+  "task_priority" tinyint(20) COMMENT '任务优先级 ',
    PRIMARY KEY (`id`)
 ) ENGINE=`InnoDB` DEFAULT CHARACTER SET utf8mb4 COMMENT='任务计划表';
 

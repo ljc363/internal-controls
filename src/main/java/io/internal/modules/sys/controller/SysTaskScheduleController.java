@@ -1,20 +1,17 @@
 package io.internal.modules.sys.controller;
 
-import java.util.Arrays;
-import java.util.Map;
-
 import io.internal.common.utils.Constant;
 import io.internal.common.utils.PageUtils;
 import io.internal.common.utils.R;
 import io.internal.modules.sys.entity.SysTaskScheduleEntity;
+import io.internal.modules.sys.entity.SysUserEntity;
 import io.internal.modules.sys.service.SysTaskScheduleService;
+import io.internal.modules.sys.service.SysUserService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 
 
@@ -32,16 +29,18 @@ import org.springframework.web.bind.annotation.RestController;
 public class SysTaskScheduleController extends AbstractController{
     @Autowired
     private SysTaskScheduleService sysTaskScheduleService;
-
+    @Autowired
+    private SysUserService sysUserService;
     /**
-     * 列表
+     * 获取本人的任务列表
      */
     @RequestMapping("/ownList")
-    @RequiresPermissions("sys:taskSchedule:ownList")
     public R ownList(@RequestParam Map<String, Object> params){
-
-        PageUtils page = sysTaskScheduleService.queryPage(params);
-        return R.ok().put("page", page);
+        if(getUserId() != Constant.SUPER_ADMIN){
+            params.put("userId", getUserId());
+        }
+        PageUtils page = sysTaskScheduleService.queryPage1(params);
+       return R.ok().put("page", page);
     }
 
     /**
@@ -50,8 +49,8 @@ public class SysTaskScheduleController extends AbstractController{
     @RequestMapping("/list")
     @RequiresPermissions("sys:taskSchedule:list")
     public R list(@RequestParam Map<String, Object> params){
-        PageUtils page = sysTaskScheduleService.queryPage(params);
 
+        PageUtils page = sysTaskScheduleService.queryPage(params);
         return R.ok().put("page", page);
     }
 

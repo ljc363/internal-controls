@@ -12,6 +12,8 @@ public class Constant {
 	public static final int SUPER_ADMIN = 1;
     /** 数据权限过滤 */
     public static final String SQL_FILTER = "sql_filter";
+
+    public static final String SSS = "sql_filter";
     /**
      * 当前页码
      */
