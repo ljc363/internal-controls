@@ -4,6 +4,7 @@ package io.internal.modules.sys.entity;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
 
 import io.internal.common.validator.group.AddGroup;
@@ -77,6 +78,12 @@ public class SysUserEntity implements Serializable {
 	 * 创建时间
 	 */
 	private Date createTime;
+
+	/**
+	 * 是否删除  -1：已删除  0：正常
+	 */
+	@TableLogic
+	private Integer delFlag;
 
 	/**
 	 * 角色ID列表

@@ -1,6 +1,8 @@
 package io.internal.modules.sys.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
 
 import java.io.Serializable;
@@ -35,6 +37,7 @@ public class SysPostEntity implements Serializable {
 	/**
 	 * 是否删除  -1：已删除  0：正常
 	 */
+	@TableLogic
 	private Integer delFlag;
 
 }

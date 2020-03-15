@@ -108,7 +108,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserDao, SysUserEntity> i
 
 	@Override
 	public void deleteBatch(Long[] userId) {
-		this.removeByIds(Arrays.asList(userId));
+	   baseMapper.deleteBatchIds(Arrays.asList(userId));
 	}
 
 	@Override

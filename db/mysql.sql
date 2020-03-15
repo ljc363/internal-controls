@@ -54,6 +54,7 @@ CREATE TABLE `sys_project_m` (
   `starts_time` datetime COMMENT '开始时间',
   `end_time` datetime COMMENT '结束时间',
   `status` tinyint COMMENT '状态  0未开始，1开发中，2延期，3完成',
+  `del_flag` tinyint DEFAULT 0 COMMENT '是否删除  -1：已删除  0：正常',
   `remark` varchar(500) COMMENT '备注',
   PRIMARY KEY (`id`)
 ) ENGINE=`InnoDB` DEFAULT CHARACTER SET utf8mb4 COMMENT='项目记录';
@@ -69,6 +70,7 @@ CREATE TABLE `sys_project_milepost` (
   `actual_start_time` datetime COMMENT '实际开始时间',
   `actual_end_time` datetime COMMENT '实际结束时间',
   `status` tinyint COMMENT '状态  0未开始，1开始，2完成',
+  `del_flag` tinyint DEFAULT 0 COMMENT '是否删除  -1：已删除  0：正常',
   `remark` varchar(500) COMMENT '备注',
   PRIMARY KEY (`id`)
 ) ENGINE=`InnoDB` DEFAULT CHARACTER SET utf8mb4 COMMENT='项目里程碑';
@@ -88,10 +90,11 @@ CREATE TABLE `sys_task_schedule` (
   `person_in_charge` varchar(100) NOT NULL COMMENT '负责人',
   `auditor` varchar(100) COMMENT '审核人',
   `remark` varchar(500) COMMENT '备注',
-  "estimated_working_hours" varchar(20) COMMENT '预计工时',
-  "actual_working_hours" varchar(20) COMMENT '实际工时',
-  "completion_ratio" varchar(50) COMMENT '完成比例',
-  "task_priority" tinyint(20) COMMENT '任务优先级 ',
+  `estimated_working_hours` varchar(20) COMMENT '预计工时',
+  `actual_working_hours` varchar(20) COMMENT '实际工时',
+  `completion_ratio` varchar(50) COMMENT '完成比例',
+  `task_priority` tinyint(20) COMMENT '任务优先级 ',
+  `del_flag` tinyint DEFAULT 0 COMMENT '是否删除  -1：已删除  0：正常',
    PRIMARY KEY (`id`)
 ) ENGINE=`InnoDB` DEFAULT CHARACTER SET utf8mb4 COMMENT='任务计划表';
 

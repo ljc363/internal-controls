@@ -36,10 +36,10 @@ public class SysTaskScheduleController extends AbstractController{
      */
     @RequestMapping("/ownList")
     public R ownList(@RequestParam Map<String, Object> params){
-        if(getUserId() != Constant.SUPER_ADMIN){
-            params.put("userId", getUserId());
-        }
+          getRealName();
+
         PageUtils page = sysTaskScheduleService.queryPage1(params);
+         //PageUtils page = sysTaskScheduleService.personInCharge(getRealName());
        return R.ok().put("page", page);
     }
 

@@ -70,6 +70,7 @@ public class SysTaskScheduleEntity implements Serializable {
 	/**
 	 * 负责人
 	 */
+
 	private String personInCharge;
 	/**
 	 * 审核人

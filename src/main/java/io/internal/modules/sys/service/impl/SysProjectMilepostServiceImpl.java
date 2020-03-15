@@ -30,11 +30,13 @@ public class SysProjectMilepostServiceImpl extends ServiceImpl<SysProjectMilepos
     private SysUserService sysUserService;
     @Override
     public PageUtils queryPage(Map<String, Object> params) {
-        String personInCharge = (String)params.get("personInCharge");
+        String realName = (String)params.get("realName");
+        String status = (String)params.get("status");
         IPage<SysProjectMilepostEntity> page = this.page(
                 new Query<SysProjectMilepostEntity>().getPage(params),
                 new QueryWrapper<SysProjectMilepostEntity>()
-                .like(StringUtils.isNotBlank(personInCharge),"person_in_charge",personInCharge)
+                        .like(StringUtils.isNotBlank(status),"status",status)
+                        .like(StringUtils.isNotBlank(realName),"person_in_charge",realName)
         );
         return new PageUtils(page);
     }
