@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.sun.org.omg.CORBA.ContextIdSeqHelper;
 import io.internal.common.utils.PageUtils;
@@ -15,6 +16,7 @@ import io.internal.modules.sys.entity.SysTaskScheduleEntity;
 import io.internal.modules.sys.entity.SysUserEntity;
 import io.internal.modules.sys.service.SysTaskScheduleService;
 import io.internal.modules.sys.service.SysUserService;
+import javafx.scene.control.Pagination;
 import org.apache.commons.lang.StringUtils;
 import org.apache.tomcat.util.descriptor.web.ContextHandler;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,7 @@ import org.springframework.stereotype.Service;
 
 import java.net.ContentHandler;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -57,10 +60,7 @@ public class SysTaskScheduleServiceImpl extends ServiceImpl<SysTaskScheduleDao, 
         this.removeByIds(Arrays.asList(ids));
     }
 
-   @Override
-    public SysTaskScheduleEntity personInCharge(String personInCharge) {
-        return baseMapper.personInCharge(personInCharge);
-    }
+
 
     @Override
     public PageUtils queryPage1(Map<String, Object> params) {
@@ -82,5 +82,6 @@ public class SysTaskScheduleServiceImpl extends ServiceImpl<SysTaskScheduleDao, 
         }
         return new PageUtils(page);
     }
+
 
 }

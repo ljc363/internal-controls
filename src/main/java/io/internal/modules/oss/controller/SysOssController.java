@@ -5,13 +5,10 @@ package io.internal.modules.oss.controller;
 import com.google.gson.Gson;
 import io.internal.common.exception.RRException;
 import io.internal.common.utils.ConfigConstant;
-import io.internal.common.utils.Constant;
 import io.internal.common.utils.PageUtils;
 import io.internal.common.utils.R;
 import io.internal.common.validator.ValidatorUtils;
 import io.internal.common.validator.group.AliyunGroup;
-import io.internal.common.validator.group.QcloudGroup;
-import io.internal.common.validator.group.QiniuGroup;
 import io.internal.modules.oss.cloud.CloudStorageConfig;
 import io.internal.modules.oss.cloud.OSSFactory;
 import io.internal.modules.oss.entity.SysOssEntity;
@@ -48,7 +45,6 @@ public class SysOssController {
 	@RequiresPermissions("sys:oss:all")
 	public R list(@RequestParam Map<String, Object> params){
 		PageUtils page = sysOssService.queryPage(params);
-
 		return R.ok().put("page", page);
 	}
 
@@ -74,22 +70,14 @@ public class SysOssController {
 		//校验类型
 		ValidatorUtils.validateEntity(config);
 
-		if(config.getType() == Constant.CloudService.QINIU.getValue()){
-			//校验七牛数据
-			ValidatorUtils.validateEntity(config, QiniuGroup.class);
-		}else if(config.getType() == Constant.CloudService.ALIYUN.getValue()){
 			//校验阿里云数据
-			ValidatorUtils.validateEntity(config, AliyunGroup.class);
-		}else if(config.getType() == Constant.CloudService.QCLOUD.getValue()){
-			//校验腾讯云数据
-			ValidatorUtils.validateEntity(config, QcloudGroup.class);
-		}
-
+		ValidatorUtils.validateEntity(config, AliyunGroup.class);
+		
         sysConfigService.updateValueByKey(KEY, new Gson().toJson(config));
 
 		return R.ok();
 	}
-	
+
 
 	/**
 	 * 上传文件
@@ -102,18 +90,22 @@ public class SysOssController {
 		}
 
 		//上传文件
-		String suffix = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
-		String url = OSSFactory.build().uploadSuffix(file.getBytes(), suffix);
+		String suffix = file.getOriginalFilename();  //文件名
+		String suffix1 = suffix.substring(suffix.lastIndexOf(".")); //截取后缀
+		String url = OSSFactory.build().uploadSuffix(file.getBytes(), suffix1);
 
 		//保存文件信息
 		SysOssEntity ossEntity = new SysOssEntity();
-		ossEntity.setUrl(url);
+		ossEntity.setUrl(suffix);
 		ossEntity.setCreateDate(new Date());
 		sysOssService.save(ossEntity);
-
 		return R.ok().put("url", url);
 	}
 
+
+	public R download(){
+		return null;
+	}
 
 	/**
 	 * 删除

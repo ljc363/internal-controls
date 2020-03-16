@@ -26,8 +26,8 @@
   </select>
 
 
-    <select id="personInCharge" resultType="io.internal.modules.sys.entity.SysTaskScheduleEntity">
-        SELECT * FROM sys_task_schedule a WHERE a.person_in_charge = #{personInCharge} and  a.status<![CDATA[!= ]]>2
+    <select id="selectList" resultType="io.internal.modules.sys.entity.SysTaskScheduleEntity">
+        SELECT * FROM sys_task_schedule a WHERE a.user_id = #{userId} and  a.status<![CDATA[!= ]]>2
     </select>
 
 </mapper>

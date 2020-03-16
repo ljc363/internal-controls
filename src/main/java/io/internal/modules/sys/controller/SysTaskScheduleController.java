@@ -1,5 +1,7 @@
 package io.internal.modules.sys.controller;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.internal.common.utils.Constant;
 import io.internal.common.utils.PageUtils;
 import io.internal.common.utils.R;
@@ -11,6 +13,7 @@ import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 
 
@@ -36,10 +39,7 @@ public class SysTaskScheduleController extends AbstractController{
      */
     @RequestMapping("/ownList")
     public R ownList(@RequestParam Map<String, Object> params){
-          getRealName();
-
         PageUtils page = sysTaskScheduleService.queryPage1(params);
-         //PageUtils page = sysTaskScheduleService.personInCharge(getRealName());
        return R.ok().put("page", page);
     }
 

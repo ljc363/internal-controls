@@ -11,7 +11,7 @@ import java.util.Date;
 import java.util.UUID;
 
 /**
- * 云存储(支持七牛、阿里云、腾讯云、又拍云)
+ * 云存储
  *
  * @author
  */
@@ -34,7 +34,6 @@ public abstract class CloudStorageService {
         if(StringUtils.isNotBlank(prefix)){
             path = prefix + "/" + path;
         }
-
         return path + suffix;
     }
 
