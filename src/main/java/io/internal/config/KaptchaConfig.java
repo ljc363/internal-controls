@@ -29,5 +29,6 @@ public class KaptchaConfig {
         DefaultKaptcha defaultKaptcha = new DefaultKaptcha();
         defaultKaptcha.setConfig(config);
         return defaultKaptcha;
+
     }
 }

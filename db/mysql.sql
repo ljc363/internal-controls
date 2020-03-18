@@ -204,6 +204,8 @@ CREATE TABLE `sys_oss` (
 
 -- 初始数据 
 INSERT INTO `sys_user` (`user_id`, `username`, `password`, `salt`, `status`,`position_id`, `create_user_id`, `create_time`) VALUES ('1', 'admin', '9ec9750e709431dad22365cabc5c625482e574c74adaebba7dd02f1129e4ce1d', 'YzcmCZNvbXocrsz9dm8e', '1','1', '1', '2020-3-8 11:11:11');
+INSERT INTO `sys_user` (`user_id`, `username`, `password`, `salt`, `status`,`position_id`, `create_user_id`, `create_time`) VALUES ('2', 'root', '9ec9750e709431dad22365cabc5c625482e574c74adaebba7dd02f1129e4ce1d', 'YzcmCZNvbXocrsz9dm8e', '1','1', '1', '2020-3-8 11:11:11');
+
 
 INSERT INTO `sys_menu` VALUES (1, 0, '系统管理', NULL, NULL, 0, 'system', 2);
 INSERT INTO `sys_menu` VALUES (2, 1, '管理员列表', 'sys/user', NULL, 1, 'admin', 1);

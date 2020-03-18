@@ -13,6 +13,7 @@ import io.internal.modules.oss.cloud.CloudStorageConfig;
 import io.internal.modules.oss.cloud.OSSFactory;
 import io.internal.modules.oss.entity.SysOssEntity;
 import io.internal.modules.oss.service.SysOssService;
+import io.internal.modules.sys.controller.AbstractController;
 import io.internal.modules.sys.service.SysConfigService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +31,7 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("sys/oss")
-public class SysOssController {
+public class SysOssController extends AbstractController {
 	@Autowired
 	private SysOssService sysOssService;
     @Autowired
@@ -72,7 +73,7 @@ public class SysOssController {
 
 			//校验阿里云数据
 		ValidatorUtils.validateEntity(config, AliyunGroup.class);
-		
+
         sysConfigService.updateValueByKey(KEY, new Gson().toJson(config));
 
 		return R.ok();
@@ -96,16 +97,14 @@ public class SysOssController {
 
 		//保存文件信息
 		SysOssEntity ossEntity = new SysOssEntity();
-		ossEntity.setUrl(suffix);
+		ossEntity.setFileName(suffix);
+		ossEntity.setUrl(url);
+		ossEntity.setUploadingPeopl(getRealName());
 		ossEntity.setCreateDate(new Date());
 		sysOssService.save(ossEntity);
 		return R.ok().put("url", url);
 	}
 
-
-	public R download(){
-		return null;
-	}
 
 	/**
 	 * 删除

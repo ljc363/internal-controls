@@ -2,8 +2,11 @@
 
 package io.internal.modules.sys.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import io.internal.common.utils.PageUtils;
 import io.internal.common.utils.Query;
@@ -25,7 +28,9 @@ public class SysLogServiceImpl extends ServiceImpl<SysLogDao, SysLogEntity> impl
 
         IPage<SysLogEntity> page = this.page(
             new Query<SysLogEntity>().getPage(params),
-            new QueryWrapper<SysLogEntity>().like(StringUtils.isNotBlank(key),"username", key)
+            Wrappers .<SysLogEntity>lambdaQuery()
+                    .like(StringUtils.isNotBlank(key),SysLogEntity::getUsername, String.format("%%%s%%",key))
+                    .orderByDesc(SysLogEntity::getId)
         );
 
         return new PageUtils(page);

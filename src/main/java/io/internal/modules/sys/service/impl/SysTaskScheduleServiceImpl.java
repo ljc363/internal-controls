@@ -11,6 +11,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.sun.org.omg.CORBA.ContextIdSeqHelper;
 import io.internal.common.utils.PageUtils;
 import io.internal.common.utils.Query;
+import io.internal.modules.sys.controller.AbstractController;
 import io.internal.modules.sys.dao.SysTaskScheduleDao;
 import io.internal.modules.sys.entity.SysTaskScheduleEntity;
 import io.internal.modules.sys.entity.SysUserEntity;
@@ -48,10 +49,10 @@ public class SysTaskScheduleServiceImpl extends ServiceImpl<SysTaskScheduleDao, 
                 .like(StringUtils.isNotBlank(taskName), SysTaskScheduleEntity::getTaskName,String.format("%%%s%%",taskName))
                 .orderByAsc(SysTaskScheduleEntity::getTaskPriority)
         );
-          for (SysTaskScheduleEntity taskSchedule : page.getRecords()){
+          /*for (SysTaskScheduleEntity taskSchedule : page.getRecords()){
               SysUserEntity sysUserEntity = sysUserService.getById(taskSchedule.getUserId());
               taskSchedule.setPersonInCharge(sysUserEntity.getRealName());
-          }
+          }*/
         return new PageUtils(page);
     }
 
@@ -64,6 +65,7 @@ public class SysTaskScheduleServiceImpl extends ServiceImpl<SysTaskScheduleDao, 
 
     @Override
     public PageUtils queryPage1(Map<String, Object> params) {
+
         String projectName = (String)params.get("projectName");
         String taskName = (String)params.get("taskName");
         String status = (String)params.get("status");
@@ -76,10 +78,10 @@ public class SysTaskScheduleServiceImpl extends ServiceImpl<SysTaskScheduleDao, 
                 .like(StringUtils.isNotBlank(projectName),SysTaskScheduleEntity::getProjectName,String.format("%%%s%%",projectName))
                 .orderByAsc(SysTaskScheduleEntity::getTaskPriority)
         );
-        for (SysTaskScheduleEntity taskSchedule : page.getRecords()){
+        /*for (SysTaskScheduleEntity taskSchedule : page.getRecords()){
             SysUserEntity sysUserEntity = sysUserService.getById(taskSchedule.getUserId());
             taskSchedule.setPersonInCharge(sysUserEntity.getRealName());
-        }
+        }*/
         return new PageUtils(page);
     }
 
